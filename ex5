@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+/*void BubbleSortNum(vector<pair<int,string>> &lista,int tam){ 
+    for(int fim=tam-1;fim>0;fim--){
+        for(int i=0;i<fim;i++){
+            if(lista[i].first>lista[i+1].first){
+				        pair<int,string> aux;
+                aux=lista[i];
+                lista[i]=lista[i+1];
+                lista[i+1]=aux;
+            }
+        }
+    }
+}*/
+
+void BubbleSortChar(vector<string>&feiticios){
+    bool troca;
+    int tam = feiticios.size();
+    for(int fim=tam-1;fim>0;fim--){
+        for(int i=0;i<fim;i++){
+            if(feiticios[i] > feiticos[i+1]){
+				 swap(feiticos[i],feiticos[i+1]);
+                 troca = true;         
+            }
+        }
+    }
+} 
+
+int main ()
+{
+    vector<string> feiticos = {
+        
+        "Expelliarmus",
+        "Alohomora",
+        "Lumos",
+        "Expecto Patronum",
+        "Wingardium Leviosa",
+        "Avada Kedavra",
+        "Accio",
+        "Stupefy",
+        "Impedimenta"
+    };
+    
+    BubbleSortChar(feiticos,int tam); 
+    cout<<"Lista de feitiços ordenado alfabeticamente: " <<feiticos<<endl;
+    
+}
