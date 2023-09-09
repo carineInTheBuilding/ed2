@@ -1,0 +1,34 @@
+#include<iostream>
+#include<cstdlib>
+using namespace std;
+
+int main()
+{
+	vector<pair<string, string>>lista;
+	//LEITURA DE ARQUIVO 
+	FILE *file = fopen("got_characters.txt", "r");
+	if(file==NULL){
+		cout<<"Erro";
+	}
+	else{
+		char linha[50];
+		int cont=0;
+		while(fgets(linha, sizeof(linha), file) && cont < 100){
+			cont++;
+			string f1,f2;
+			stringstream ss;
+			ss<<linha;
+			ss>>f1>>f2;
+			lista.push_back({stoi(f1),f2});
+		}
+		fclose(file);
+		string buscaLinear;
+		cin>>buscaLinear;
+		for(int i=0; i<lista.size();i++){
+			if(buscaLinear==lista.first[i]){
+				cout<<"ACHOU!!!\n";
+			}
+			else cout<<"NAO ACHOU!!!!:(\n";
+		}
+	}
+}
