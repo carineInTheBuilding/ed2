@@ -1,0 +1,69 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// classe nó
+struct NO {
+    int item;
+    NO *esq;
+    NO *dir;
+};
+
+//classe arvore
+class Tree {
+  private: NO *root; // raiz
+
+  public: Tree() { root = NULL; } // inicializa arvore
+
+public: void inserir(string membros) {
+    NO *novo = new NO(); // cria um novo Nó
+    novo->item = membros; // atribui o valor recebido ao item de dados do Nó
+    novo->dir = NULL;
+    novo->esq = NULL;
+    if (root == NULL) root = novo;
+    else  { // se nao for a raiz
+      NO *atual = root;
+      NO *anterior;
+      while(true) {
+        anterior = atual;
+        if (membros <= atual->item) { // ir para esquerda
+          atual = atual->esq;
+          if (atual == NULL) {
+            anterior->esq = novo;
+            return;
+          } 
+        }  // fim da condição ir a esquerda
+        else { // ir para direita
+           atual = atual->dir;
+           if (atual == NULL) {
+             anterior->dir = novo;
+             return;
+           }
+        } // fim da condição ir a direita
+      } // fim do laço while
+    } // fim do else não raiz
+
+  }
+
+  public: NO *buscar(string membroEspecifico) {
+    if (root == NULL) return NULL; // se arvore vazia
+    NO *atual = root;  // começa a procurar desde raiz
+    while (atual->item != membroEspecifico) { // enquanto nao encontrou
+      if(membros < atual->item ) atual = atual->esq; // caminha para esquerda
+      else atual = atual->dir; // caminha para direita
+      if (atual == NULL) return NULL; // encontrou uma folha -> sai
+    } // fim laço while
+    return atual; // terminou o laço while e chegou aqui é pq encontrou item
+  } 
+
+
+int main(){
+	Tree arv;
+    string membros;
+    string membroEspecifico;
+    cout << "\nInsira os membros da sociedade do anel:";
+    cin >> membros;
+    cout << "\nInsira um membro específico que queira procurar:";
+    cin >> membroEspecifico;
+    
+}
