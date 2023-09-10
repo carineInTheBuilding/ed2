@@ -1,0 +1,64 @@
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+void troca(string &a,string &b){
+    string temp = a;
+    a = b;
+    b = temp;
+} 
+
+int metade(vector<string> &nomeSuperHerois, int low, int high){
+   string pivot = nomeSuperHerois[high];
+    int i = (low - 1);
+    for(int j = low; j <= high - 1; j++){
+        if(nomeSuperHerois[j] <= pivot){
+            i++;
+            troca(nomeSuperHerois[i], nomeSuperHerois[j]);
+        }
+    }
+    troca(nomeSuperHerois[i+1],nomeSuperHerois[high]);
+    return (i + 1);
+}
+
+void QuickSort(vector<string> &nomeSuperHerois, int low, int high) {
+    if (low < high){
+        int pi = metade(nomeSuperHerois, low, high);
+        QuickSort(nomeSuperHerois, low, pi - 1);
+        QuickSort(nomeSuperHerois, pi + 1, high);
+    }
+}
+
+void show (vector<string> &nomeSuperHerois){
+	for(auto x:nomeSuperHerois) cout<<x<<endl;
+}
+
+int BuscaBinaria(vector<string>&nomeSuperHerois, int nome, int tam){ 
+    int pi=0, pf=tam-1, pos;
+    while(pi<=pf){
+    	pos=(pi+pf)/2; //dividindo o vetor ao meio
+        if(nome==nomeSuperHerois[pos]) return pos; //retornando a posição do numero se ele for encontrado
+        if(nome<nomeSuperHerois[pos]) pf=pos-1; //o numero esta a esquerda do meio
+        else pi=pos+1; // o numero esta a direita do meio
+    }
+    return -1; //numero ñ encontrado
+}
+
+int main() {
+	vector<string>nomeSuperHerois = {"capita Marvel", "viuva Negra", "wanda", "mulher maravilha", "gamora"}
+
+    cout << "Vetor original:" << endl;
+
+    quickSort(nomeSuperHerois, 0, nomeSuperHerois.size() - 1);
+
+    cout << "Vetor ordenado:" << endl;
+    
+    show(nomeSuperHerois);
+cout<<"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"<<endl;
+
+	int tam=nomeSuperHerois.size();
+	string nome;cin>>nome;
+	cout<<nomeSuperHerois[BuscaBinaria(nomeSuperHerois, nome, tam)]<<endl;
+    return 0;
+}
