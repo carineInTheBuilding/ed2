@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+void show(vector<pair<string,string>> &encarnacao){
+    for(auto x:encarnacao) cout<<x.first<<" "<<x.second<<"--";
+    cout<<endl;
+}
+
+void SelectionSort(vector<pair<string,string>> &encarnacao,int tam){
+	for(int i=0;i<tam;i++){
+		for(int j=i+1;j<tam;j++){
+			if(encarnacao[j].first<encarnacao[i].first){
+				pair<string,string> aux=encarnacao[i];
+				encarnacao[i]=encarnacao[j];
+				encarnacao[j]=aux;
+			}
+		}
+	}
+}
+ 
+int BuscaBinaria(vector<pair<string,string>> &encarnacao, string nome, int tam){ // modo interativo
+    int pi=0, pf=tam-1, pos;
+    while(pi<=pf){
+    	pos=(pi+pf)/2; //dividindo o vetor ao meio
+        if(nome==encarnacao[pos].first) return pos; //retornando a posição do numero se ele for encontrado
+        if(nome<encarnacao[pos].first) pf=pos-1; //o numero esta a esquerda do meio
+        else pi=pos+1; // o numero esta a direita do meio
+    }
+    return -1; //numero ñ encontrado 
+}
+
+int main(){
+	vector<pair<string,string>> encarnacao = {("William","Hartnell"), ("Patrick","Troughton"), ("Jon","Pertwee"), ("Tom","Baker")};
+	int tam = encarnacao.size();
+	SelectionSort(encarnacao, tam-1);
+	show(encarnacao);
+	string nome;getline(cin, nome);
+	stringstream aux(nome);
+	string aux1;
+	aux>>aux1;
+	cout<<"Posicao da encarnacao: "<<BuscaBinaria(encarnacao, aux1, tam)<<endl;
+	
+}
